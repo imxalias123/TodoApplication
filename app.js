@@ -67,3 +67,14 @@ app.get("/todos/", async (request, response) => {
   data = await db.all(getTodoQuery);
   response.send(data);
 });
+
+app.get("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+
+  const getTodoQuery = `
+    SELECT * FROM todo WHERE 
+    id = ${todoId};`;
+
+  const data = await db.get(getTodoQuery);
+  response.send(data);
+});
